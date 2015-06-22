@@ -7,13 +7,12 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "juve@2x.JPG"
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "juve@3x.png"
+      "filename" : "juve@2x.JPG"
     }
   ],
   "info" : {

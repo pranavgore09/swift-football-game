@@ -39,6 +39,5 @@ func generateMCQ()-> [MCQ]{
     return data
 }
 
-
-
+var userScoreOfThisGame:Int = 0
 

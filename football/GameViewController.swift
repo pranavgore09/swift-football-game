@@ -27,12 +27,23 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         showNextQuestion()
         score=0
         seconds = maxSecondsForOneQ
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didEnterBackground:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didEnterForeground:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
         // Do any additional setup after loading the view.
+    }
+    
+    func didEnterBackground(notification: NSNotification){
+        timer.invalidate()
+    }
+    
+    func didEnterForeground(notification: NSNotification){
+        println("ok, in forground now")
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("tick"), userInfo: nil, repeats: true)
     }
 
     func showNextQuestion()-> Void{
         if(self.currentQuestionIndex >= self.game?.data.count){
-            println("End. Score = \(score)")
+            userScoreOfThisGame = score
             self.dismissViewControllerAnimated(true, completion: nil)
         }else{
             self.currentQuestion = self.game?.data[self.currentQuestionIndex]

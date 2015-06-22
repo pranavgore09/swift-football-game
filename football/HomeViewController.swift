@@ -27,9 +27,23 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return GameList.count
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.GameListView.reloadData()
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.GameListView.dequeueReusableCellWithIdentifier("GameListCell") as! UITableViewCell
         cell.textLabel!.text = GameList[indexPath.row]
+        cell.detailTextLabel?.text = "Your current score is \(userScoreOfThisGame)"
+        if(userScoreOfThisGame > 3){
+            cell.detailTextLabel?.font = UIFont(name: "HelveticaNeue-BoldOblique", size: 20.0)
+            cell.detailTextLabel?.textColor = UIColor.greenColor()
+            cell.backgroundColor = UIColor.orangeColor()
+        }else if(userScoreOfThisGame >= 1){
+            cell.backgroundColor = UIColor.yellowColor()
+        }else{
+            cell.backgroundColor = UIColor.grayColor()
+        }
         return cell
     }
 
